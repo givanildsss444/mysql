@@ -1,4 +1,4 @@
-const db = require('./db')
+const db = require('./src/database/db')
 
 db.query('SELECT * FROM users', (err, results) => {
     if(err){
