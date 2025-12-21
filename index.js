@@ -5,13 +5,13 @@ db.query('SELECT * FROM users', (err, results) => {
         console.error(err)
         return
     }
-    console.log(results)
+    console.log(results);
 })
 
 db.query('SELECT * FROM products', (err, res) =>{
     if (err){
-        console.error(err)
+        console.error(err);
     }
-    console.log(res)
+    console.log(res);
 
 })
