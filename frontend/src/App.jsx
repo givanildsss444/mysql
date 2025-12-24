@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import Orders from './pages/Orders'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -23,12 +22,12 @@ function App() {
 
   return (
 
-    <div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
       {logged ? (
 
         <>
-          <button onClick={handleLogout}>Logout</button>
           <Orders />
+          <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
         </>
 
       ) : registering ? (
@@ -36,7 +35,7 @@ function App() {
           <Register onRegister={handleRegister} />
           <p>
             Já tem uma conta? 
-            <button onClick={() => setRegistering(false)}>
+            <button onClick={() => setRegistering(false)} className="p-2 m-2">
               Login
             </button>
           </p>
@@ -47,7 +46,7 @@ function App() {
           <Login onLogin={handleLogin} />
           <p>
             Não tem uma conta? 
-            <button onClick={() => setRegistering(true)}>
+            <button onClick={() => setRegistering(true)} className="p-2 m-2">
               Registrar
             </button>
           </p>

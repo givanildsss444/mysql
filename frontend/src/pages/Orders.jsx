@@ -54,19 +54,18 @@ export default function Orders({  onLogout }) {
 
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 border-2 border-gray-300 p-4 rounded-lg bg-gray-500 w-1/2 justify-center items-center">
       <header>
-        <h2>Meus Pedidos</h2>
-        <button onClick={onLogout}>Sair</button>
+        <h2 className="text-2xl" >Meus Pedidos</h2>
       </header>
 
       <AddOrder onAdd={addOrder} />
 
       <ul>
         {orders.map(order => (
-          <li key={order.id}>
+          <li key={order.id} className='flex gap-2 justify-center items-center'>
             <strong>{order.descricao}</strong> — R$ {order.valor}
-            <button onClick={() => deleteOrder(order.id)}>X</button>
+            <button onClick={() => deleteOrder(order.id)} className="bg-red-500 text-white px-2  rounded">X</button>
           </li>
         ))}
       </ul>
