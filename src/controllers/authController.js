@@ -63,6 +63,15 @@ exports.login = (req, res) =>{
             JWT_SECRET,
             { expiresIn: '1h' }
         )
+
+        console.log('BACKEND LOGIN USER ID:', user.id)
+
+        res.json({
+            token,
+            userId: user.id
+
+        })
+
         res.status(200).json({ mensagem: 'Login bem-sucedido ✅', token })
     })
 

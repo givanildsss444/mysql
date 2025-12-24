@@ -1,35 +1,49 @@
-import { useState, useEffect } from "react";
-import api from "../services/api";
+import { useEffect, useState } from 'react'
+import api from '../services/api'
+import AddOrder from './AddOrder'
 
 export default function Orders() {
-    const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState([])
 
-    useEffect(() => {
-  const token = localStorage.getItem('token');
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const userId = localStorage.getItem('userId')
+        const token = localStorage.getItem('token')
 
-  api.get('/users/1/orders', {
-    headers: {
-      Authorization: `Bearer ${token}`
+        const res = await api.get(`/${userId}/orders`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        setOrders(res.data)
+      } catch (err) {
+        console.error(err)
+        alert('Erro ao carregar pedidos')
+      }
     }
-  })
-  .then(res => setOrders(res.data))
-  .catch(() => alert('Erro ao carregar pedidos'));
-}, []);
 
-    return(
-        <div>
+    fetchOrders()
+  }, [])
 
-            <h2>Meus Pedidos</h2>
+  const addOrder = (newOrder) => {
+    setOrders(prev => [...prev, newOrder])
+  }
 
-            <ul>
-                {orders.map((o, index) => (
-                    <li key={index}>
-                        {o.descricao} - R$ {o.valor} (Cliente: {o.nome})
-                    </li>
-                ))}
-            </ul>
+  return (
+    <div>
+      <h2>Meus Pedidos</h2>
 
-        </div>
-    );
+      <AddOrder onAdd={addOrder} />
 
+      <ul>
+        {orders.map((order, index) => (
+          <li key={index}>
+            <strong>{order.descricao}</strong> — R$ {order.valor}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }

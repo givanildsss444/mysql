@@ -12,7 +12,7 @@ app.use(express.json());
 
 
 app.use('/users', usersRoutes);
-app.use('/users', ordersRoutes);
+app.use('/', ordersRoutes);
 
 app.get('/ping', (req, res) => {
   res.send('pong');

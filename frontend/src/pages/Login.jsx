@@ -13,8 +13,11 @@ export default function Login({ onLogin }) {
                 email,
                 senha
             })
+            
+            console.log('LOGIN RESPONSE:', res.data)
 
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('userId', res.data.userId)
             onLogin()
 
             } 

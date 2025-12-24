@@ -6,6 +6,7 @@ router.get('/test', (req, res) => {
   res.send('funcionando✅✅✅✅');
 });
 
+router.post('/orders', controller.createForUsers)
 router.get('/:id/orders', controller.listForUser);
 
 module.exports = router;
