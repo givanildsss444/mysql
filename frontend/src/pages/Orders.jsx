@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import api from '../services/api'
 import AddOrder from './AddOrder'
 
-export default function Orders() {
+export default function Orders({  onLogout }) {
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
@@ -55,15 +55,18 @@ export default function Orders() {
 
   return (
     <div>
-      <h2>Meus Pedidos</h2>
+      <header>
+        <h2>Meus Pedidos</h2>
+        <button onClick={onLogout}>Sair</button>
+      </header>
 
       <AddOrder onAdd={addOrder} />
 
       <ul>
-        {orders.map((order, index) => (
-          <li key={index}>
+        {orders.map(order => (
+          <li key={order.id}>
             <strong>{order.descricao}</strong> — R$ {order.valor}
-            <button onClick={() => deleteOrder(order.id)}>Delete</button>
+            <button onClick={() => deleteOrder(order.id)}>X</button>
           </li>
         ))}
       </ul>

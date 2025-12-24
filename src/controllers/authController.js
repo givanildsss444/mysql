@@ -41,38 +41,40 @@ exports.login = (req, res) =>{
 
     const sql = `SELECT * FROM users WHERE email = ?`
 
-    db.query(sql, [email], (err, rows) => {
-        if(err){
-            return res.status(500).json(err)
-        }
+    db.query(
+    'SELECT * FROM users WHERE email = ?',
+    [email],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro no servidor' })
+      }
 
-        if(rows.length === 0){
-            return res.status(401).json({error: 'Credenciais Inválidas'})
-        }
+      if (results.length === 0) {
+        return res.status(401).json({ error: 'Usuário não encontrado' })
+      }
 
-        const user = rows[0]
+      const user = results[0]
 
-        const passwordMatch = bcrypt.compareSync(senha, user.senha)
+      const senhaValida = bcrypt.compareSync(senha, user.senha)
 
-        if(!passwordMatch){
-            return res.status(401).json({error: 'Credenciais Inválidas'})
-        }
+      if (!senhaValida) {
+        return res.status(401).json({ error: 'Senha inválida' })
+      }
 
-        const token = jwt.sign(
-            { id: user.id, email: user.email },
-            JWT_SECRET,
-            { expiresIn: '1h' }
-        )
+      const token = jwt.sign(
+        { id: user.id, email: user.email },
+        JWT_SECRET,
+        { expiresIn: '1h' }
+      )
 
-        console.log('BACKEND LOGIN USER ID:', user.id)
+      console.log('BACKEND LOGIN USER ID:', user.id)
 
-        res.json({
-            token,
-            userId: user.id
-
-        })
-
-        res.status(200).json({ mensagem: 'Login bem-sucedido ✅', token })
-    })
+      // ✅ UMA ÚNICA RESPOSTA
+      return res.json({
+        token,
+        userId: user.id
+      })
+    }
+  )
 
 }
