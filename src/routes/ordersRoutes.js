@@ -8,5 +8,6 @@ router.get('/test', (req, res) => {
 
 router.post('/orders', controller.createForUsers)
 router.get('/:id/orders', controller.listForUser);
+router.delete('/orders/:id', controller.deleteForUser);
 
 module.exports = router;
