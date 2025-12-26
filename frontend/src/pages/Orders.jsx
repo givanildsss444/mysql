@@ -65,7 +65,7 @@ export default function Orders({  onLogout }) {
         {orders.map(order => (
           <li key={order.id} className='flex gap-2 justify-center items-center'>
             <strong>{order.descricao}</strong> — R$ {order.valor}
-            <button onClick={() => deleteOrder(order.id)} className="bg-red-500 text-white px-2  rounded">X</button>
+            <button onClick={() => deleteOrder(order.id)} className="bg-red-500 text-white px-2  rounded m-1">X</button>
           </li>
         ))}
       </ul>

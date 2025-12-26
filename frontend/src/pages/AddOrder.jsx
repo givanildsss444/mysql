@@ -37,7 +37,7 @@ export default function AddOrder({ onAdd }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='flex gap-2'>
+    <form onSubmit={handleSubmit} className='flex gap-2 h-8'>
       <input
         type="text"
         placeholder="Descrição do pedido"
@@ -54,7 +54,7 @@ export default function AddOrder({ onAdd }) {
         required
       />
 
-      <button className="p-2 bg-gray-400 rounded-lg">Adicionar Pedido</button>
+      <button className="p-2 bg-gray-400 rounded-lg text-center align-center justify-center">Adicionar Pedido</button>
     </form>
   )
 }
